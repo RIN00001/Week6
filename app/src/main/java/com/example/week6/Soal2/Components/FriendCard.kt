@@ -25,7 +25,6 @@ fun FriendCardPreview() {
             height = 180,
             weight = 75,
             age = 29,
-            workouts = emptyList(),
             isFriended = false
         ),
         onToggleFriend = {}
