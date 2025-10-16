@@ -4,8 +4,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 data class Workout(
     val name: String,
-    val selected: Boolean = false,
-    val icon: ImageVector
+    val calories: String,
+    val type: String,
+    val icon: ImageVector,
+    val selected: Boolean = false
 )
 
 data class Profile(

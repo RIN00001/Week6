@@ -33,9 +33,8 @@ import androidx.compose.ui.unit.dp
 @Preview(showBackground = true)
 @Composable
 fun WorkoutCardPreview() {
-    WorkoutCard(
-        workout = Workout("Morning Yoga", icon = Icons.Default.SelfImprovement),
-        onToggle = {}
+    WorkoutCardActive(
+        workout = Workout("Morning Yoga", "300","Sports",icon = Icons.Default.SelfImprovement),
     )
 }
 @Composable
@@ -81,16 +80,18 @@ fun WorkoutCard(
                         ),
                     )
                     Text(
-                        text = when (workout.name){
-                            "Morning Yoga" -> "Flexibility"
-                            "Evening Run" -> "Cardio"
-                            "Cardio Blast" -> "High Intensity"
-                            "Strength Training" -> "Muscle Building"
-                            "Cycling" -> "Endurance"
-                            else -> "General Fitness"
-                        }, style = MaterialTheme.typography.bodyLarge.copy(
-                                color = Color.Black
-                        )
+                        text = "Calories ${workout.calories}",
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            color = Color.Black,
+                            fontWeight = FontWeight.Medium
+                        ),
+                    )
+                    Text(
+                        text = workout.type,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            color = Color.Black,
+                            fontWeight = FontWeight.Light
+                        ),
                     )
                 }
             }
@@ -109,6 +110,66 @@ fun WorkoutCard(
                     contentDescription = "Toggle Workout",
                     tint = Color.White
                 )
+            }
+        }
+    }
+}
+@Composable
+fun WorkoutCardActive(
+    workout: Workout
+) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFEDF9EF))
+        , modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 6.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp)
+            , horizontalArrangement = Arrangement.SpaceBetween
+            , verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(60.dp)
+                        .background(Color(0xFFBDE6C2), shape = CircleShape),
+                    contentAlignment = Alignment.Center
+                ){
+                    Icon(
+                        imageVector = workout.icon,
+                        contentDescription = null,
+                        tint = Color(0xFF2E7D32),
+                        modifier = Modifier.size(40.dp)
+                    )
+                }
+                Spacer(Modifier.width(16.dp))
+
+                Column {
+                    Text(
+                        text = workout.name,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold
+                        ),
+                    )
+                    Text(
+                        text = "Calories ${workout.calories}",
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            color = Color.Black,
+                        fontWeight = FontWeight.Medium
+                    ),
+                    )
+                    Text(
+                        text = workout.type,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            color = Color.Black,
+                            fontWeight = FontWeight.Light
+                    ),
+                    )
+                }
             }
         }
     }

@@ -13,8 +13,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.week6.Soal2.DB.ProfileViewModel
+import com.example.week6.Soal2.Models.ProfileViewModel
 
 
 @Preview(showBackground = true, showSystemUi = true)
@@ -28,8 +29,6 @@ fun ProfileScreenPreview() {
 @Composable
 fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
     val profile = viewModel.profile
-    val friends = viewModel.friends
-    val workouts = viewModel.availableWorkouts
 
     Column(
         modifier = Modifier
@@ -42,6 +41,7 @@ fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
                 color = Color.Black,
                 fontWeight = FontWeight.Bold
             ),
+            fontSize = 27.sp
         )
 
         Spacer(Modifier.height(12.dp))
@@ -50,36 +50,55 @@ fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
 
         Spacer(Modifier.height(16.dp))
 
-        Text("Friend Suggestion",
+        Text("My Friends",
             style = MaterialTheme.typography.bodyLarge.copy(
             color = Color.Black,
             fontWeight = FontWeight.Bold
-        ),)
+        ),
+            fontSize = 24.sp
+        )
         Spacer(Modifier.height(8.dp))
 
-        Row(
-            modifier = Modifier
-                .horizontalScroll(rememberScrollState())
-        ) {
-            friends.forEach { friend ->
-                FriendCard(
-                    friend = friend,
-                    onToggleFriend = { name -> viewModel.toggleFriend(name) }
-                )
+        if (profile.friends.isEmpty()) {
+            Text(
+                text = "No friends added yet",
+                style = MaterialTheme.typography.bodyMedium.copy(color = Color.Gray),
+                modifier = Modifier.padding(30.dp)
+            )
+        } else {
+            Row(
+                modifier = Modifier
+                    .horizontalScroll(rememberScrollState())
+            ) {
+                profile.friends.forEach { friend ->
+                    FriendCardActive(friend = friend)
+                }
             }
         }
 
         Spacer(Modifier.height(16.dp))
 
-        Text("Workout List", style = MaterialTheme.typography.titleMedium)
+        Text("My Workouts",
+            style = MaterialTheme.typography.bodyLarge.copy(
+                color = Color.Black,
+                fontWeight = FontWeight.Bold
+            ),
+            fontSize = 24.sp
+
+        )
         Spacer(Modifier.height(8.dp))
 
-        LazyColumn {
-            items(workouts) { workout ->
-                WorkoutCard(
-                    workout = workout,
-                    onToggle = { viewModel.toggleWorkout(workout.name) }
-                )
+        if (profile.workouts.isEmpty()) {
+            Text(
+                text = "No workouts added yet",
+                style = MaterialTheme.typography.bodyMedium.copy(color = Color.Gray),
+                modifier = Modifier.padding(30.dp)
+            )
+        } else {
+            LazyColumn {
+                items(profile.workouts) { workout ->
+                    WorkoutCardActive(workout = workout)
+                }
             }
         }
     }

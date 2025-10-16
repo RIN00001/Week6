@@ -19,15 +19,14 @@ import androidx.compose.ui.unit.dp
 @Preview(showBackground = true)
 @Composable
 fun FriendCardPreview() {
-    FriendCard(
+    FriendCardActive(
         friend = Profile(
             name = "Evan M.",
             height = 180,
             weight = 75,
             age = 29,
             isFriended = false
-        ),
-        onToggleFriend = {}
+        )
     )
 }
 
@@ -44,7 +43,8 @@ fun FriendCard(friend: Profile, onToggleFriend: (String) -> Unit) {
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(12.dp)
+                .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
@@ -79,15 +79,61 @@ fun FriendCard(friend: Profile, onToggleFriend: (String) -> Unit) {
                 onClick = { onToggleFriend(friend.name) },
                 shape = RoundedCornerShape(50),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (friend.isFriended) Color.Gray else Color(0xFF58B4FF)
+                    containerColor = if (friend.isFriended) Color(0xFFFF3D00) else Color(0xFF58B4FF)
                 ),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = if (friend.isFriended) "Added" else "Add Friend",
+                    text = if (friend.isFriended) "Unfriend" else "Add Friend",
                     color = Color.White
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun FriendCardActive(friend: Profile) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F7FB)),
+        modifier = Modifier
+            .width(150.dp)
+            .padding(end = 8.dp),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(12.dp)
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(60.dp)
+                    .background(Color(0xFFAEE3F2), shape = CircleShape),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = "Friend Avatar",
+                    tint = Color(0xFF242F32),
+                    modifier = Modifier.size(40.dp)
+                )
+            }
+
+            Spacer(Modifier.height(8.dp))
+
+            Text(
+                text = friend.name,
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                color = Color.Black
+            )
+            Text(
+                text = "${friend.age} years old",
+                style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray)
+            )
+
+            Spacer(Modifier.height(8.dp))
+
         }
     }
 }
