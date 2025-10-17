@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.week5.Soal1.ProfileScreen
+import com.example.week6.Soal2.Components.AddWorkout
 import com.example.week6.Soal2.Components.NavigationBar
 import com.example.week6.Soal2.Models.ProfileViewModel
 import com.example.week6.Soal2.Models.Screens
@@ -57,6 +58,6 @@ fun MainNav(viewModel: ProfileViewModel = viewModel() ){
             composable(Screens.FRIENDS.route){
                 FriendScreen(viewModel = viewModel)
             }
+            }
         }
     }
-}
