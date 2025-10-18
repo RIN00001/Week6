@@ -41,7 +41,7 @@ fun MenuChoice(
             title = "Food delivery",
             subtitle = "Delivery from 99 $",
             image = R.drawable.pandaburger,
-            onClick = { onNavigate(ItemNav.HOME.title) }
+            onClick = { onNavigate(ItemNav.DELIVERY.title) }
         )
 
         MenuCard(
@@ -49,7 +49,7 @@ fun MenuChoice(
             title = "Pandamart",
             subtitle = "New users $10 off",
             image = R.drawable.pandacart,
-            onClick = { onNavigate(ItemNav.DELIVERY.title) }
+            onClick = { onNavigate(ItemNav.VEGETABLES.title) }
         )
     }
 }

@@ -67,7 +67,7 @@ fun FoodCard(title: String, items: List<Item>) {
             columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.height(240.dp)
+            modifier = Modifier.height(360.dp)
         ) {
             items(items) { item ->
                 FoodItemCard(item = item)

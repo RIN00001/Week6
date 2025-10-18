@@ -41,15 +41,15 @@ fun AppFilter(
 ) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         filters.forEach { filter ->
             FilterButton(
                 text = filter,
                 isSelected = filter == selectedFilter,
-                onClick = { onFilterClick(filter) }
+                onClick = { onFilterClick(filter) },
+                modifier = Modifier.weight(1f)
             )
         }
     }
@@ -59,23 +59,23 @@ fun AppFilter(
 fun FilterButton(
     text: String,
     isSelected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
-            .width(110.dp)
+        modifier = modifier
             .background(
                 color = if (isSelected) Color(0xFFC573A8) else Color(0xFFD5C6CF),
                 shape = RoundedCornerShape(20.dp)
             )
             .clickable { onClick() }
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 12.dp, vertical = 8.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
             color = if (isSelected) Color.White else Color(0xFFC573A8),
-            fontSize = 14.sp,
+            fontSize = 12.sp,
             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
         )
     }
