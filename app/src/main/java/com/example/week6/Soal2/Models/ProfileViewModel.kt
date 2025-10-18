@@ -45,7 +45,13 @@ var availableWorkouts by mutableStateOf(listOf<Workout>())
         listOf(
             Profile("Evan M.", 180, 75, 29, emptyList()),
             Profile("Tanjung D.", 168, 60, 21, emptyList()),
-            Profile("RudiTak", 170, 65, 18, emptyList())
+            Profile("RudiTak", 170, 65, 18, emptyList()),
+            Profile("Alex J.", 175, 70, 25, emptyList()),
+            Profile("Sandy W.", 160, 55, 22, emptyList()),
+            Profile("Maya S.", 165, 58, 24, emptyList()),
+            Profile("John D.", 182, 80, 30, emptyList()),
+            Profile("Sophia T.", 170, 62, 27, emptyList()),
+            Profile("Maria L.", 158, 54, 23, emptyList())
         )
     )
         private set
